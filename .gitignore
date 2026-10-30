@@ -1,0 +1,24 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Generated outputs (the scripts recreate these)
+data/forecast.json
+ANT_Financial_Model.xlsx
+site/model/
+site/data/
+source/
+
+# Python / Node caches
+__pycache__/
+*.pyc
+.venv/
+venv/
+node_modules/
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

@@ -1,0 +1,913 @@
+{
+  "meta": {
+    "units": "USD millions",
+    "s1": "https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm",
+    "flags": {
+      "s1": "Stated in S-1",
+      "derived": "Arithmetic on S-1 figures",
+      "press": "Press-reported (Oct 14-15 2026 investor presentation)",
+      "est": "Model estimate",
+      "n/e": "Not estimable; excluded"
+    },
+    "q3_assumptions": {
+      "revenue": "16,800 per Bloomberg/The Information/CNBC; S-1 states Q3 = 86x Q4'24 ($197M) => ~16,942",
+      "compute": "revenue / 1.7 (FT: $1.70 revenue per $1 compute)",
+      "adj_operating_income": "11% adjusted operating margin (press; Q3-only vs YTD ambiguous)",
+      "sbc": "1600 est. (trend from Q1'26 924, Q2'26 1,261)",
+      "non_compute_opex_split": "Q2'26 mix of personnel / S&M / other",
+      "interest_income": "3.8% annual yield on 6/30/26 cash + ST investments",
+      "fv_change_notes": "Not estimated: depends on 9/30 fair value of Amazon notes (1.84B shares)"
+    }
+  },
+  "quarterly_is": {
+    "periods": [
+      "Q1'25",
+      "Q2'25",
+      "Q3'25",
+      "Q4'25",
+      "Q1'26",
+      "Q2'26",
+      "Q3'26"
+    ],
+    "lines": {
+      "revenue": {
+        "values": [
+          376,
+          787,
+          1382,
+          2040,
+          4731,
+          11555,
+          16800
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "press"
+        ]
+      },
+      "compute": {
+        "values": [
+          944,
+          1390,
+          2047,
+          2945,
+          3387,
+          5558,
+          9882
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "press"
+        ]
+      },
+      "personnel": {
+        "values": [
+          218,
+          320,
+          489,
+          812,
+          1295,
+          1857,
+          2466
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "bartz": {
+        "values": [
+          0,
+          0,
+          1500,
+          0,
+          0,
+          0,
+          0
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "sales_marketing": {
+        "values": [
+          24,
+          96,
+          202,
+          246,
+          1033,
+          2135,
+          2835
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "other_opex": {
+        "values": [
+          125,
+          181,
+          233,
+          873,
+          683,
+          1031,
+          3369
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "total_opex": {
+        "values": [
+          1311,
+          1987,
+          4471,
+          4876,
+          6398,
+          10581,
+          18552
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "operating_income": {
+        "values": [
+          -935,
+          -1200,
+          -3089,
+          -2836,
+          -1667,
+          974,
+          -1752
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "interest_income": {
+        "values": [
+          51,
+          64,
+          124,
+          192,
+          349,
+          762,
+          1251
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "fv_change_notes": {
+        "values": [
+          -5701,
+          -5241,
+          -9165,
+          -14201,
+          -12791,
+          -59597,
+          null
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "n/e"
+        ]
+      },
+      "other_income": {
+        "values": [
+          0,
+          0,
+          -3,
+          -5,
+          -309,
+          -8448,
+          null
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "n/e"
+        ]
+      },
+      "pretax_income": {
+        "values": [
+          -6585,
+          -6377,
+          -12133,
+          -16850,
+          -14418,
+          -66309,
+          -501
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "tax": {
+        "values": [
+          7,
+          0,
+          5,
+          8,
+          21,
+          0,
+          0
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "net_income": {
+        "values": [
+          -6592,
+          -6377,
+          -12138,
+          -16858,
+          -14439,
+          -66309,
+          -501
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "sbc": {
+        "values": [
+          105,
+          181,
+          305,
+          574,
+          924,
+          1261,
+          1600
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      },
+      "noncash_charity": {
+        "values": [
+          0,
+          0,
+          0,
+          541,
+          126,
+          0,
+          2000
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1"
+        ]
+      },
+      "adj_operating_income": {
+        "values": [
+          -830,
+          -1019,
+          -1284,
+          -1721,
+          -617,
+          2235,
+          1848
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "press"
+        ]
+      },
+      "adj_net_income": {
+        "values": [
+          -786,
+          -955,
+          -1168,
+          -1539,
+          -310,
+          2981,
+          3099
+        ],
+        "flags": [
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "s1",
+          "est"
+        ]
+      }
+    }
+  },
+  "annual_is": {
+    "periods": [
+      "FY23",
+      "FY24",
+      "FY25",
+      "H1'25",
+      "H1'26"
+    ],
+    "revenue": [
+      41,
+      386,
+      4585,
+      1163,
+      16286
+    ],
+    "compute": [
+      433,
+      2522,
+      7326,
+      2334,
+      8945
+    ],
+    "personnel": [
+      95,
+      454,
+      1839,
+      538,
+      3152
+    ],
+    "bartz": [
+      0,
+      0,
+      1500,
+      0,
+      0
+    ],
+    "sales_marketing": [
+      2,
+      43,
+      568,
+      120,
+      3168
+    ],
+    "other_opex": [
+      62,
+      347,
+      1412,
+      306,
+      1714
+    ],
+    "total_opex": [
+      592,
+      3366,
+      12645,
+      3298,
+      16979
+    ],
+    "operating_income": [
+      -551,
+      -2980,
+      -8060,
+      -2135,
+      -693
+    ],
+    "interest_income": [
+      69,
+      106,
+      431,
+      115,
+      1111
+    ],
+    "fv_change_notes": [
+      -1045,
+      -5434,
+      -34308,
+      -10942,
+      -72388
+    ],
+    "other_income": [
+      -2,
+      0,
+      -8,
+      0,
+      -8757
+    ],
+    "pretax_income": [
+      -1529,
+      -8308,
+      -41945,
+      -12962,
+      -80727
+    ],
+    "tax": [
+      2,
+      1,
+      20,
+      7,
+      21
+    ],
+    "net_income": [
+      -1531,
+      -8309,
+      -41965,
+      -12969,
+      -80748
+    ]
+  },
+  "functional_opex": {
+    "periods": [
+      "FY23",
+      "FY24",
+      "FY25",
+      "H1'25",
+      "H1'26"
+    ],
+    "cost_of_revenue": [
+      26,
+      752,
+      2773,
+      1019,
+      2380
+    ],
+    "research_development": [
+      422,
+      2275,
+      6338,
+      1850,
+      9741
+    ],
+    "sales_marketing": [
+      76,
+      163,
+      911,
+      239,
+      3808
+    ],
+    "bartz": [
+      0,
+      0,
+      1500,
+      0,
+      0
+    ],
+    "general_admin": [
+      68,
+      176,
+      1123,
+      190,
+      1050
+    ],
+    "total_opex": [
+      592,
+      3366,
+      12645,
+      3298,
+      16979
+    ],
+    "gross_margin": {
+      "FY23": 0.366,
+      "FY24": -0.948,
+      "FY25": 0.395,
+      "H1'25": 0.124,
+      "H1'26": 0.854
+    }
+  },
+  "balance_sheet": {
+    "periods": [
+      "Dec 31 '24",
+      "Dec 31 '25",
+      "Jun 30 '26"
+    ],
+    "cash": [
+      3141,
+      17388,
+      112389
+    ],
+    "st_investments": [
+      0,
+      2889,
+      19262
+    ],
+    "accounts_receivable": [
+      95,
+      909,
+      5833
+    ],
+    "prepaid_other_current": [
+      2076,
+      2560,
+      496
+    ],
+    "total_current_assets": [
+      5312,
+      23746,
+      137980
+    ],
+    "restricted_cash": [
+      13,
+      13,
+      2529
+    ],
+    "ppe_net": [
+      19,
+      146,
+      1187
+    ],
+    "rou_assets": [
+      35,
+      126,
+      1157
+    ],
+    "goodwill": [
+      0,
+      154,
+      576
+    ],
+    "other_noncurrent_assets": [
+      2373,
+      476,
+      3929
+    ],
+    "total_assets": [
+      7752,
+      24661,
+      147358
+    ],
+    "ap_accrued": [
+      333,
+      2511,
+      5422
+    ],
+    "lease_liab_current": [
+      13,
+      37,
+      148
+    ],
+    "deferred_revenue": [
+      28,
+      269,
+      1650
+    ],
+    "total_current_liabilities": [
+      374,
+      2817,
+      7220
+    ],
+    "lease_liab_noncurrent": [
+      39,
+      80,
+      931
+    ],
+    "convertible_notes": [
+      14116,
+      41677,
+      108566
+    ],
+    "other_noncurrent_liabilities": [
+      150,
+      823,
+      750
+    ],
+    "total_liabilities": [
+      14679,
+      45397,
+      117467
+    ],
+    "redeemable_preferred": [
+      2874,
+      29769,
+      157510
+    ],
+    "apic": [
+      239,
+      1644,
+      5336
+    ],
+    "aoci": [
+      0,
+      5,
+      -53
+    ],
+    "accumulated_deficit": [
+      -10040,
+      -52154,
+      -132902
+    ],
+    "total_stockholders_deficit": [
+      -9801,
+      -50505,
+      -127619
+    ]
+  },
+  "cash_flow": {
+    "periods": [
+      "FY23",
+      "FY24",
+      "FY25",
+      "H1'25",
+      "H2'25",
+      "H1'26"
+    ],
+    "net_income": [
+      -1531,
+      -8309,
+      -41965,
+      -12969,
+      -28996,
+      -80748
+    ],
+    "sbc": [
+      29,
+      192,
+      1158,
+      279,
+      879,
+      2185
+    ],
+    "d_and_a": [
+      3,
+      21,
+      40,
+      14,
+      26,
+      97
+    ],
+    "fv_change_notes": [
+      1045,
+      5434,
+      34308,
+      10942,
+      23366,
+      72388
+    ],
+    "donation_matching": [
+      0,
+      0,
+      541,
+      0,
+      541,
+      126
+    ],
+    "other_fin_instruments": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      8720
+    ],
+    "other_noncash": [
+      0,
+      7,
+      11,
+      5,
+      6,
+      -7
+    ],
+    "chg_ar": [
+      -10,
+      -90,
+      -834,
+      -384,
+      -450,
+      -4982
+    ],
+    "chg_prepaid_other": [
+      -1253,
+      -3190,
+      1771,
+      212,
+      1559,
+      2094
+    ],
+    "chg_ap_accrued": [
+      84,
+      222,
+      2079,
+      257,
+      1822,
+      2679
+    ],
+    "chg_leases": [
+      -1,
+      0,
+      13,
+      7,
+      6,
+      -3
+    ],
+    "chg_deferred_rev": [
+      7,
+      21,
+      241,
+      124,
+      117,
+      1380
+    ],
+    "cfo": [
+      -1627,
+      -5692,
+      -2637,
+      -1513,
+      -1124,
+      3929
+    ],
+    "capex": [
+      -2,
+      -15,
+      -131,
+      -18,
+      -113,
+      -482
+    ],
+    "purchase_st_inv": [
+      0,
+      0,
+      -3082,
+      0,
+      -3082,
+      -18972
+    ],
+    "sale_st_inv": [
+      0,
+      0,
+      213,
+      0,
+      213,
+      2610
+    ],
+    "other_investing": [
+      0,
+      -7,
+      -77,
+      -31,
+      -46,
+      -337
+    ],
+    "cfi": [
+      -2,
+      -22,
+      -3077,
+      -49,
+      -3028,
+      -17181
+    ],
+    "pref_stock_proceeds": [
+      445,
+      1188,
+      16548,
+      3549,
+      12999,
+      110432
+    ],
+    "finance_lease_principal": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      -4
+    ],
+    "convertible_notes_issued": [
+      1750,
+      6050,
+      3450,
+      1300,
+      2150,
+      0
+    ],
+    "common_stock_proceeds": [
+      3,
+      10,
+      111,
+      49,
+      62,
+      355
+    ],
+    "repurchases": [
+      0,
+      0,
+      -149,
+      -149,
+      0,
+      0
+    ],
+    "safes_issued": [
+      122,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "offering_costs": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      -9
+    ],
+    "cff": [
+      2320,
+      7248,
+      19960,
+      4749,
+      15211,
+      110774
+    ],
+    "flags": [
+      "s1",
+      "s1",
+      "s1",
+      "s1",
+      "derived",
+      "s1"
+    ]
+  }
+}

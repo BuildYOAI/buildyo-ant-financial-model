@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anthropic S-1 Scenarios</title>
+<meta name="description" content="Interactive financial model of Anthropic's S-1: three scenarios through 2030, with sliders for growth, compute commitments and the IPO.">
+<link rel="stylesheet" href="styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="viz-root">
+<header class="masthead">
+  <p class="kicker">BuildYO · Analysis</p>
+  <h1>Anthropic's S-1: three paths to 2030</h1>
+  <p class="dek">Anthropic's growth is real, and so are its compute bills. The S-1 shows hundreds of billions of
+    dollars of compute contracted 12–18 months ahead of the revenue it has to earn back. Pick a path, move the
+    sliders, and watch the income statement, balance sheet and cash flow respond.</p>
+</header>
+
+<nav class="scenario-tabs" role="tablist" aria-label="Scenario">
+  <button role="tab" data-scenario="high" class="tab">
+    <span class="swatch s1"></span><span><strong>The Amazon Path</strong><small>High momentum</small></span></button>
+  <button role="tab" data-scenario="decel" class="tab">
+    <span class="swatch s2"></span><span><strong>The Cisco Path</strong><small>Deceleration</small></span></button>
+  <button role="tab" data-scenario="decline" class="tab">
+    <span class="swatch s3"></span><span><strong>The AOL Path</strong><small>Decline</small></span></button>
+</nav>
+<p class="scenario-blurb" id="scenarioBlurb"></p>
+
+<section class="tiles" id="tiles" aria-label="Headline numbers"></section>
+
+<div class="layout">
+<aside class="controls" aria-label="Assumptions">
+  <div class="controls-head">
+    <h2>Your assumptions</h2>
+    <button id="resetBtn" class="link-btn" type="button">Reset to path</button>
+  </div>
+  <form id="controls" autocomplete="off"></form>
+  <p class="fine">Sliders start at the selected path's settings. Your changes are saved in the page link, so you can share it.</p>
+</aside>
+
+<main class="charts">
+  <section class="card">
+    <h2>Revenue: three paths</h2>
+    <p class="sub">Annual revenue, $B. History from the S-1; 2026 includes Q3 (press-reported) and Q4 (forecast).
+      The selected path follows your sliders; the other two stay at their presets.</p>
+    <div class="chart-box"><canvas id="chRevenue"></canvas></div>
+  </section>
+
+  <section class="card">
+    <h2>The compute staircase</h2>
+    <p class="sub">Quarterly compute expense by contract, $B, with revenue as a line. Contracts start on
+      fixed dates whatever demand does; this is the bill revenue has to catch up to.</p>
+    <div class="chart-box tall"><canvas id="chStaircase"></canvas></div>
+  </section>
+
+  <section class="card">
+    <h2>The zigzag</h2>
+    <p class="sub">Quarterly margins from Q1'26 (2025 margins ran −84% to −250%). Each time a large compute tranche
+      lands, margins dip until revenue fills the new capacity. The Q4'26 GAAP drop is the one-time IPO stock-comp
+      catch-up. Gross margin counts serving compute only; adjusted operating margin excludes stock comp and
+      non-cash donations.</p>
+    <div class="chart-box"><canvas id="chMargins"></canvas></div>
+  </section>
+
+  <section class="card">
+    <h2>"Cash-flow positive"? It depends on the yardstick</h2>
+    <p class="sub">Quarterly, $B. The Broadcom chips are leased, so repaying them shows up under financing, not
+      operations. Cash from operations can be positive while cash after lease repayments is negative.</p>
+    <div class="chart-box"><canvas id="chCash"></canvas></div>
+  </section>
+
+  <section class="card">
+    <h2>Cash in the bank</h2>
+    <p class="sub">Cash and short-term investments at quarter-end, $B. If it would fall below $10B, the model draws
+      the $15B revolver, then shows any remaining shortfall as a funding gap that would need new equity.</p>
+    <div class="chart-box short"><canvas id="chLiquidity"></canvas></div>
+  </section>
+
+  <section class="card">
+    <div class="table-head">
+      <h2>Financial statements</h2>
+      <div class="seg" role="group" aria-label="Statement">
+        <button type="button" data-stmt="income" class="on">Income</button>
+        <button type="button" data-stmt="balance">Balance sheet</button>
+        <button type="button" data-stmt="cashflow">Cash flow</button>
+      </div>
+      <div class="seg" role="group" aria-label="Period">
+        <button type="button" data-view="quarterly" class="on">Quarterly</button>
+        <button type="button" data-view="annual">Annual</button>
+      </div>
+    </div>
+    <p class="sub">$ millions. <span class="flag-key s1k">S-1</span> <span class="flag-key press">press-reported</span>
+      <span class="flag-key est">estimate</span> <span class="flag-key fc">forecast</span></p>
+    <div class="table-wrap"><table id="stmt"></table></div>
+  </section>
+
+  <section class="card prose">
+    <h2>How this works</h2>
+    <p><strong>History.</strong> Six quarters (Q1'25–Q2'26) and three years of statements come from Anthropic's
+      S-1, filed October 26, 2026. The balance sheet and cash flow are only disclosed at half-year points.
+      Q3'26 revenue ($16.8B) was reported by Bloomberg, The Information and CNBC from an October investor
+      presentation, consistent with the S-1's statement that Q3 revenue was 86× Q4'24. Compute is derived from
+      the FT's reported $1.70 of revenue per compute dollar. The S-1 discloses a $2.0B donation-matching charge.
+      The other Q3 lines are estimates.</p>
+    <p><strong>Supply.</strong> Each compute contract the S-1 names (Google, Amazon, Microsoft, SpaceXAI, Lambda,
+      Nscale, AMD, Broadcom leases, a planned Google TPU tranche) is a row with its disclosed size and dates.
+      How spending ramps within those dates is an assumption, and one of the biggest swing factors.</p>
+    <p><strong>Demand.</strong> Revenue grows quarter over quarter, with growth fading toward a long-run rate and
+      slowing as it approaches a ceiling. Serving customers takes revenue ÷ serving efficiency (about 7×,
+      matching the S-1's 85% first-half gross margin). Everything else is training and research. If demand
+      needs more compute than is contracted, the model buys spot compute at a premium, up to a limit. Past it,
+      training is squeezed first, then sales are lost, so new compute deals can add revenue. If contracts exceed
+      need, Anthropic still pays, unless the resale response is on, in which case it resells the idle capacity
+      at a discount. The price-war slider cuts prices while usage holds, so revenue falls but serving costs don't.</p>
+    <p><strong>The IPO.</strong> Amazon's convertible notes ($6.2B face) convert into about 1.84B shares. The
+      model marks them to the IPO price, a large non-cash loss, then moves them and the preferred stock into
+      equity. Restricted stock units that vest on the IPO add about $30B of front-loaded stock comp. The IPO
+      valuation and raise are press speculation, which is why they're sliders.</p>
+    <p><strong>The analogs.</strong> Amazon overbuilt ahead of demand, nearly ran short of cash, and grew into its
+      capacity. Cisco bought for growth that stalled, survived, and never regained its peak valuation. AOL's
+      product kept working while the market moved on. The analogs describe the shape of each path, not its
+      scale. None of these companies had Anthropic's revenue base.</p>
+    <p class="fine">Not investment advice. Forecasts are model outputs under stated assumptions, not predictions.
+      All figures in $ millions unless noted. Source: <a href="https://www.sec.gov/Archives/edgar/data/2130357/000162828026067168/anthropicpbc-sx1.htm">Anthropic, PBC Form S-1</a>.</p>
+  </section>
+</main>
+</div>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

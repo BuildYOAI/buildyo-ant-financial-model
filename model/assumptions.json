@@ -1,0 +1,114 @@
+{
+  "_readme": "All $ in millions. Quarter labels like 2026Q4. Index 0 = Q3'26 (calibration quarter, from data/historicals.json). Every value here is an assumption unless its _src says S-1. Scenario blocks override `common` (deep merge).",
+
+  "common": {
+    "horizonEnd": "2030Q4",
+
+    "contracts": {
+      "_src": "S-1 MD&A 'Infrastructure Service Arrangements'. Totals/windows are S-1; ramp shapes are assumptions.",
+      "cloud": [
+        { "id": "legacy_committed", "label": "Pre-2026 CSP minimums", "type": "annualSchedule",
+          "schedule": { "2026": 7059, "2027": 11128, "2028": 10832, "2029": 8304, "2030": 5428 },
+          "_src": "S-1 Note 13: non-cancelable purchase commitments as of 12/31/25" },
+        { "id": "google_cloud", "label": "Google Cloud", "total": 114500, "start": "2026Q2", "end": "2033Q3", "ramp": 6 },
+        { "id": "amazon_cloud", "label": "Amazon (AWS)", "total": 110000, "start": "2026Q2", "end": "2036Q1", "ramp": 8 },
+        { "id": "microsoft", "label": "Microsoft", "total": 44900, "start": "2026Q4", "end": "2033Q2", "ramp": 4 },
+        { "id": "spacexai", "label": "SpaceXAI (NVIDIA)", "fullRate": 9300, "rampProfile": [0.4], "start": "2026Q4", "end": "2029Q4",
+          "cancelable": true, "_src": "S-1: up to $120.5B, ~$3.1B/month at full delivery expected Dec 2026; cancelable on 90 days' notice after Jan/Mar 2027" },
+        { "id": "lambda", "label": "Lambda (NVIDIA)", "total": 41300, "start": "2027Q1", "end": "2034Q4", "ramp": 4 },
+        { "id": "nscale", "label": "Nscale (NVIDIA)", "total": 44600, "start": "2027Q2", "end": "2033Q4", "ramp": 4 },
+        { "id": "amd", "label": "AMD Helios", "total": 20000, "start": "2027Q3", "end": "2031Q2", "ramp": 4,
+          "_src": "S-1: >$20B if full initial tranche procured; not in commitments table" },
+        { "id": "google_tpu", "label": "Google TPU (additional)", "total": 137500, "start": "2028Q1", "end": "2033Q4", "ramp": 8,
+          "_src": "S-1 estimate $125-150B delivered 2028-2031; midpoint used" }
+      ],
+      "financeLeases": {
+        "id": "broadcom", "label": "Broadcom TPU leases (Anthropic Direct)",
+        "total": 161200, "termQuarters": 20, "rate": 0.071,
+        "commence": { "2026Q4": 0.10, "2027Q1": 0.15, "2027Q2": 0.15, "2027Q3": 0.15, "2027Q4": 0.15, "2028Q1": 0.15, "2028Q2": 0.15 },
+        "_src": "S-1: ~$161.2B rent excl. interest, 5-yr leases, some online 2026, more from 2027; finance-lease rate 7.1% (Note 7). Commencement split is an assumption."
+      }
+    },
+
+    "calibration": {
+      "q3HeadcountEnd": 5300,
+      "_src_headcount": "S-1: ~5,300 employees at 9/30/26",
+      "notesShares": 1840.445, "notesFairValue": 108566,
+      "_src_notes": "S-1: 1,840,444,962 Class N shares on conversion; FV $108,566M at 6/30/26",
+      "fdShares": 16936.8,
+      "_src_fdShares": "Public Benefit Fund 846.84M shares = 5% of fully diluted",
+      "preferredCarrying": 157510,
+      "ipoRsuCatchup": 2900, "ipoRsuUnrecognized": 23700, "otherAwardsUnrecognized": 3100,
+      "postJuneRsuGrants": 5800,
+      "_src_rsu": "S-1: $2.9B catch-up + $23.7B over ~2.1 yrs if IPO at 6/30; $3.1B other awards; $5.8B new RSUs after 6/30"
+    },
+
+    "demand": { "g0": 0.20, "decay": 0.75, "floor": 0.015, "ceilingARR": 500000,
+                "policyCleanupPct": 0.06, "policyQuarters": 4, "shock": null },
+    "servingEff": { "start": 7.0, "driftPerQ": 0.0,
+                    "_note": "Revenue per $ of serving compute. H1'26 cost of revenue $2,380M on $16,286M revenue => ~6.8-7.4" },
+    "trainingPctRev": { "start": 0.45, "end": 0.30, "endQuarter": "2028Q4",
+                        "_note": "Desired training/R&D compute as % of revenue; committed capacity above serving needs also lands here" },
+    "flexPremium": 1.2,
+    "spotCap": { "pctOfCommitted": 0.15, "trainingFloorPct": 0.20,
+                 "_note": "2026-10-27 (Bud): spot/flex compute capped at this share of contracted compute each quarter. Demand beyond contracted + capped spot is lost revenue, so new deals raise revenue when supply binds. Serving has priority: training is squeezed to trainingFloorPct of revenue before demand is turned away. null = unlimited spot (pre-10/27 behavior)." },
+    "priceWar": { "intensity": 0, "floorMargin": 0.35,
+                  "_note": "2026-10-27 (Bud): revenue = volume x price; serving cost follows volume. Intensity 0 = preset path; 100 = Q4'30 serving margin of floorMargin. Extra quarterly price cut is back-solved. floorMargin 35% ~ commodity inference sellers today (Cerebras 39% GM 2025; OpenAI blended 33% 2025)." },
+    "capacityResale": { "enabled": false, "recoveryPct": 0.45, "triggerAdjMargin": 0.0, "triggerQuarters": 2, "rampQuarters": 2,
+                        "_note": "2026-10-27 (Bud): only management response modeled. Once adjusted operating margin < trigger for triggerQuarters in a row, resell committed compute above serving + training needs at recoveryPct of cost, ramping in over rampQuarters. Netted in the compute line. Headcount/G&A cuts deliberately not modeled (too small vs compute)." },
+    "headcount": { "g0": 0.10, "decay": 0.85, "floor": 0.02 },
+    "costPerHeadGrowthQ": 0.01,
+    "channelFeePct": 0.145, "marketingPct": 0.025,
+    "gaPct": { "start": 0.08, "end": 0.05, "endQuarter": "2030Q4" },
+    "capexPctRev": 0.04, "ppeLifeQuarters": 20,
+    "futureCommit": { "start": "2028Q1", "stepAdd": 1000,
+                      "_note": "New compute commitments beyond the named contracts: adds stepAdd $M/qtr each quarter" },
+    "cancelSpaceXAI": null,
+    "sbc": { "postIpoAmortQuarters": 9, "newGrantPctPersonnelCash": 0.8, "newGrantRampQuarters": 4,
+             "postJuneCatchupFrac": 0.15 },
+    "ipo": { "quarter": "2026Q4", "valuation": 1750000, "raise": 100000, "primaryPct": 0.9, "feePct": 0.025,
+             "googlePlacement": 10000,
+             "_src": "Press speculation: $100B+ raise at $1.5-2T. Google option up to $10B at IPO price (S-1)." },
+    "amdEquity": { "total": 5000, "start": "2027Q3", "quarters": 4, "_src": "S-1: AMD to buy up to $5.0B Class N tied to GPU deployment" },
+    "interestYield": 0.038,
+    "revolver": { "capacity": 15000, "rate": 0.065 },
+    "minLiquidity": 10000,
+    "_minLiquidity_note": "S-1 covenant floor is $5.0B; model keeps a $10B operating buffer before drawing the revolver",
+    "taxRate": 0.21, "nolStart": 12000,
+    "_nol_note": "S-1: $8.2B federal NOL at 12/31/25; plus H1'26 operating losses (rough)",
+    "workingCapital": { "arDays": 46, "defRevPctRev": 0.143, "apPctCashOpex": 0.45,
+                        "_src": "Calibrated to 6/30/26 balance sheet (AP ex-$1.2B Bartz accrual)" }
+  },
+
+  "scenarios": {
+    "high": {
+      "label": "High Momentum — The Amazon Path", "provisional": false,
+      "_bud": "2026-10-26: Q4'26 sequential growth starts at 40% (matches reported ~$110B YE26 run-rate expectation)",
+      "demand": { "g0": 0.40, "decay": 0.85, "floor": 0.03, "ceilingARR": 1000000, "policyCleanupPct": 0.03 },
+      "servingEff": { "driftPerQ": 0.01 },
+      "headcount": { "g0": 0.12 },
+      "futureCommit": { "stepAdd": 250 },
+      "_bud_newDeals": "2026-10-28: new-deal preset lowered from 2500 to 250 so supply just keeps pace with demand (clean 'everything goes right' case). At 2500 the path carried $134B of idle compute 2027-30; the slider is now how readers explore overbuilding."
+    },
+    "decel": {
+      "label": "Deceleration — The Cisco Path", "provisional": false,
+      "_bud": "2026-10-26: big cloud deals back-loaded; SpaceXAI cancelled; no new commitments after 2028; Google TPU tranche deferred (2 yrs assumed)",
+      "rampOverrides": { "google_cloud": 16, "amazon_cloud": 16, "microsoft": 16, "lambda": 16, "nscale": 16 },
+      "cancelSpaceXAI": "2027Q3",
+      "futureCommit": { "stepAdd": 0 },
+      "deferQuarters": { "google_tpu": 8 }
+    },
+    "decline": {
+      "label": "Decline — The AOL Path", "provisional": false,
+      "_bud": "2026-10-26: AOL-style displacement. Product still works, but commoditization erodes price faster than cost. Gradual erosion, no single shock. Same contract assumptions as Deceleration.",
+      "demand": { "g0": 0.12, "decay": 0.55, "floor": -0.04, "ceilingARR": 250000, "shock": null },
+      "servingEff": { "driftPerQ": -0.04 },
+      "rampOverrides": { "google_cloud": 16, "amazon_cloud": 16, "microsoft": 16, "lambda": 16, "nscale": 16 },
+      "deferQuarters": { "google_tpu": 8 },
+      "headcount": { "g0": 0.06, "floor": 0.0 },
+      "futureCommit": { "stepAdd": 0 },
+      "cancelSpaceXAI": "2027Q3",
+      "capacityResale": { "enabled": true }
+    }
+  }
+}
